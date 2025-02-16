@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841C708B2D5F2E9F002B633F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 841C708A2D5F2E9F002B633F /* SnapKit */; };
+		841C70952D5F53DB002B633F /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 841C70942D5F53DB002B633F /* SDWebImage */; };
+		841C70972D5F53DB002B633F /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 841C70962D5F53DB002B633F /* SDWebImageMapKit */; };
 		84D106712D5CF81300C5FD90 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = 84D106702D5CF81300C5FD90 /* Reusable */; };
 		84D106742D5CF82100C5FD90 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 84D106732D5CF82100C5FD90 /* Then */; };
 /* End PBXBuildFile section */
@@ -41,7 +44,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841C708B2D5F2E9F002B633F /* SnapKit in Frameworks */,
+				841C70972D5F53DB002B633F /* SDWebImageMapKit in Frameworks */,
 				84D106712D5CF81300C5FD90 /* Reusable in Frameworks */,
+				841C70952D5F53DB002B633F /* SDWebImage in Frameworks */,
 				84D106742D5CF82100C5FD90 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +93,9 @@
 			packageProductDependencies = (
 				84D106702D5CF81300C5FD90 /* Reusable */,
 				84D106732D5CF82100C5FD90 /* Then */,
+				841C708A2D5F2E9F002B633F /* SnapKit */,
+				841C70942D5F53DB002B633F /* SDWebImage */,
+				841C70962D5F53DB002B633F /* SDWebImageMapKit */,
 			);
 			productName = MVC;
 			productReference = 84D1064A2D5CEB3400C5FD90 /* MVC.app */;
@@ -119,6 +128,8 @@
 			packageReferences = (
 				84D1066F2D5CF81300C5FD90 /* XCRemoteSwiftPackageReference "Reusable" */,
 				84D106722D5CF82100C5FD90 /* XCRemoteSwiftPackageReference "Then" */,
+				841C70892D5F2E9F002B633F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				841C70932D5F53DB002B633F /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84D1064B2D5CEB3400C5FD90 /* Products */;
@@ -350,6 +361,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		841C70892D5F2E9F002B633F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		841C70932D5F53DB002B633F /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.20.0;
+			};
+		};
 		84D1066F2D5CF81300C5FD90 /* XCRemoteSwiftPackageReference "Reusable" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/Reusable.git";
@@ -369,6 +396,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		841C708A2D5F2E9F002B633F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 841C70892D5F2E9F002B633F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		841C70942D5F53DB002B633F /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 841C70932D5F53DB002B633F /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		841C70962D5F53DB002B633F /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 841C70932D5F53DB002B633F /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
 		84D106702D5CF81300C5FD90 /* Reusable */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84D1066F2D5CF81300C5FD90 /* XCRemoteSwiftPackageReference "Reusable" */;
