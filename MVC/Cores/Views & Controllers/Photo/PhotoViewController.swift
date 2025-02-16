@@ -28,7 +28,7 @@ final class PhotoViewController: UIViewController {
     }
     
     // MARK: - Others
-    private func setupView() {
+    func setupView() {
         photoImageView.sd_setImage(with: URL(string: photo.newUrl))
         titleLabel.text = photo.title
     }
