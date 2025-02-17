@@ -6,6 +6,12 @@ class PhotosViewControllerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        let repository = MockPhotosRepository()
+        let manager = PhotosManager(repository: repository)
+//        let coodinator =
+        viewController = PhotosViewController(
+            photosMananger: manager,
+            coordinator: Coordinator)
         viewController = PhotosViewController(
             photosMananger: PhotosManager(
                 repository: PhotosRepository()),
