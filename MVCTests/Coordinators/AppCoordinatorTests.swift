@@ -2,25 +2,23 @@ import XCTest
 @testable import MVC
 
 final class AppCoordinatorTests: XCTestCase {
-    var coordinator: AppCoordinator!
-    var navigation: UINavigationController!
+    var coordinator: MockAppCoordinator!
     
     override func setUp() {
         super.setUp()
-        navigation = UINavigationController()
-        coordinator = AppCoordinator(
-            navigationController: navigation)
+        coordinator = MockAppCoordinator()
     }
     
     override func tearDown() {
         super.tearDown()
         coordinator = nil
-        navigation = nil
     }
     
     func testStartPhotosViewController() {
+        // When
         coordinator.start()
         
-        XCTAssertTrue(navigation.viewControllers.first is PhotosViewController)
+        // Then
+        XCTAssertTrue(coordinator.didStartPhotosCoordinator)
     }
 }

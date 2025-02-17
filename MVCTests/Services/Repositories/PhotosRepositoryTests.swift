@@ -2,33 +2,43 @@ import XCTest
 @testable import MVC
 
 final class PhotosRepositoryTests: XCTestCase {
-    var repository: PhotosRepositoryProtocol!
-    
     override func setUp() {
         super.setUp()
-        repository = PhotosRepository()
     }
     
     override func tearDown() {
         super.tearDown()
     }
     
-    func testFetchPhotosReturnsData() {
-        // Given
-        let expectation = self.expectation(description: "Fetch Photos")
+    func testFetchPhotosSuccess() {
+        let repository = MockPhotosRepository()
+        repository.data = [
+            PhotoEntity(albumId: 1, id: 1, title: "Photo 1")
+        ]
         
-        // When
-        repository.getPhotos { (output: APIOutput<[PhotoEntity]>) in
-            guard let photos = output.data else {
-                let error = output.error ?? APIError.unknownError
-                XCTFail("Expected success but got error: \(error)")
+        repository.getPhotos { result in
+            guard let data = result.data else {
+                XCTFail("Expected data to be non-nil")
                 return
             }
             
-            XCTAssertNotNil(photos, "Expected non-nil photos array")
-            expectation.fulfill()
+            XCTAssertEqual(data.count, 1)
+            XCTAssertEqual(data.first?.id ?? 0, 1)
         }
+    }
+    
+    func testFetchPhotosError() {
+        let repository = MockPhotosRepository()
+        repository.error = APIError.noData
         
-        waitForExpectations(timeout: 5.0, handler: nil)
+        repository.getPhotos { result in
+            guard let error = result.error as? APIError else {
+                XCTFail("Expected error to be of type APIError")
+                return
+            }
+            
+            XCTAssertEqual(error.localizedDescription,
+                           APIError.noData.localizedDescription)
+        }
     }
 }
