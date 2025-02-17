@@ -7,7 +7,7 @@ class PhotosViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         viewController = PhotosViewController(
-            photosMananger: PhotosMananger(
+            photosMananger: PhotosManager(
                 repository: PhotosRepository()),
             coordinator: PhotosCoordinator(
                 navigationController: UINavigationController()))
@@ -24,8 +24,32 @@ class PhotosViewControllerTests: XCTestCase {
         XCTAssertNotNil(viewController.tableView)
     }
     
-    func test_dependencies() {
+    func testDependencies() {
         XCTAssertNotNil(viewController.coordinator)
         XCTAssertNotNil(viewController.photosMananger)
+    }
+    
+    func testPhotosDisplaying() {
+        // setup
+        let repository = MockPhotosRepository()
+        repository.data = [
+            PhotoEntity(albumId: 1, id: 1, title: "Photo")
+        ]
+        let manager = PhotosManager(repository: repository)
+        let coordinator = PhotosCoordinator(
+            navigationController: UINavigationController())
+        viewController = PhotosViewController(
+            photosMananger: manager,
+            coordinator: coordinator)
+        
+        // load view
+        _ = viewController.view
+        
+        // tests
+        viewController.fetchPhotos()
+        XCTAssertTrue(viewController.tableView
+            .numberOfRows(inSection: 0) > 0)
+        XCTAssertTrue(viewController.tableView
+            .visibleCells.count > 0)
     }
 }

@@ -1,10 +1,10 @@
 import Foundation
 
-final class PhotosMananger {
-    let repository: PhotosRepository
+final class PhotosManager {
+    let repository: PhotosRepositoryProtocol
     var photos: [PhotoEntity] = []
     
-    init(repository: PhotosRepository) {
+    init(repository: PhotosRepositoryProtocol) {
         self.repository = repository
     }
     
@@ -24,17 +24,13 @@ final class PhotosMananger {
         repository.getPhotos {
             [weak self] (output: APIOutput<[PhotoEntity]>) in
             guard let photos = output.data else {
-                DispatchQueue.main.async {
-                    failure(output.error)
-                }
+                failure(output.error)
                 return
             }
             
             guard let self = self else { return }
             self.photos = photos
-            DispatchQueue.main.async {
-                success()
-            }
+            success()
         }
     }
 }

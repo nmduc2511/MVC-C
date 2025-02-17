@@ -8,7 +8,7 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let manager = PhotosMananger(
+        let manager = PhotosManager(
             repository: PhotosRepository()
         )
         let coordinator = PhotosCoordinator(

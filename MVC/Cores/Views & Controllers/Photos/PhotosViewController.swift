@@ -7,11 +7,11 @@ final class PhotosViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Variables
-    var photosMananger: PhotosMananger
+    var photosMananger: PhotosManager
     var coordinator: PhotosCoordinator
     
     // MARK: - init
-    init(photosMananger: PhotosMananger,
+    init(photosMananger: PhotosManager,
          coordinator: PhotosCoordinator) {
         self.photosMananger = photosMananger
         self.coordinator = coordinator
@@ -43,10 +43,18 @@ final class PhotosViewController: UIViewController {
         }
     }
     
-    private func fetchPhotos() {
+    func fetchPhotos() {
         photosMananger.fetchPhotos(
-            success: tableView.reloadData,
-            failure: showErrorAlert(error:))
+            success: { [weak self] in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            },
+            failure: { [weak self] error in
+                guard let self = self else { return }
+                self.showErrorAlert(error: error)
+            })
     }
 }
 
