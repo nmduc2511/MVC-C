@@ -1,7 +1,11 @@
 import UIKit
 
-final class PhotosCoordinator: Coordinator {
-    var navigationController: UINavigationController
+protocol PhotosCoordinatorProtocol: Coordinator {
+    func gotoPhotoDetail(photo: PhotoEntity)
+}
+
+final class PhotosCoordinator: PhotosCoordinatorProtocol {
+    var navigationController: UINavigationController!
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
