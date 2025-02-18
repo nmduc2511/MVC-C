@@ -1,6 +1,8 @@
 import XCTest
 @testable import MVC
 
+// test_ViewControllerMethod_ExpectedBehavior()
+
 class PhotosViewControllerTests: XCTestCase {
     var repository: MockPhotosRepository!
     var coordinator: MockPhotosCoordinator!
@@ -20,59 +22,59 @@ class PhotosViewControllerTests: XCTestCase {
         repository = nil
     }
     
-    func testIbOutlet() {
-        // Given
+    func test_Outlet_ShouldSetupUIComponents() {
+        // Arrange
         viewController.photosMananger = PhotosManager(
             repository: repository)
         
-        // When
+        // Act
         _ = viewController.view
         
-        // Then
+        // Assert
         XCTAssertNotNil(viewController.view)
         XCTAssertNotNil(viewController.tableView)
     }
     
-    func testDependencies() {
-        // Given
+    func test_Dependencies_ShouldSetupDependencies() {
+        // Arrange
         viewController.photosMananger = PhotosManager(
             repository: repository)
         viewController.coordinator = coordinator
         
-        // Then
+        // Assert
         XCTAssertNotNil(viewController.photosMananger)
         XCTAssertNotNil(viewController.coordinator)
     }
     
-    func testPhotosDisplaying() {
-        // Given
+    func test_FetchPhotos_ShouldUpdateTableView() {
+        // Arrange
         repository.data = [
             PhotoEntity(albumId: 1, id: 1, title: "Photo")
         ]
         
-        viewController.photosMananger = PhotosManager(repository: repository)
-        viewController.coordinator = coordinator
+        viewController.photosMananger = PhotosManager(
+            repository: repository)
         
-        // When
+        // Act
         _ = viewController.view
-        viewController.gotoPhotoDetail(PhotoEntity())
+        viewController.fetchPhotos()
         
-        // Then
+        // Assert
         XCTAssertTrue(viewController.tableView
             .numberOfRows(inSection: 0) > 0)
         XCTAssertTrue(viewController.tableView
             .visibleCells.count > 0)
     }
     
-    func testGoingToPhotoDetail() {
-        // Given
+    func test_GoToPhotoDetail_ShoudPushToPhotoViewController() {
+        // Arrange
         let photo = PhotoEntity(albumId: 1, id: 1, title: "Photo")
         viewController.coordinator = coordinator
         
-        // When
+        // Act
         viewController.gotoPhotoDetail(photo)
         
-        // Then
+        // Assert
         XCTAssertTrue(coordinator.didGotoPhotoDetailCalled)
     }
 }

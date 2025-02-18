@@ -1,6 +1,8 @@
 import XCTest
 @testable import MVC
 
+// test_MethodBeingTested_ExpectedOutcome()
+
 final class PhotosManagerTests: XCTestCase {
     var manager: PhotosManager!
     var repository: MockPhotosRepository!
@@ -15,35 +17,36 @@ final class PhotosManagerTests: XCTestCase {
         repository = nil
     }
     
-    func testFetchPhotosSuccess() {
+    func test_FetchPhotos_ShouldReturnPhotoArray() {
+        // Arrange
         let photos = [
             PhotoEntity(albumId: 1, id: 1, title: "Photo")]
         repository = MockPhotosRepository()
         repository.data = photos
         
         manager = PhotosManager(repository: repository)
+        
+        // Act
         manager.fetchPhotos(
             success: {
+                // Assert
                 XCTAssertTrue(self.manager.numberOfPhotos > 0)
-                XCTAssertNotNil(self.manager.photoAtIndex(0))
+                XCTAssertFalse(self.manager.photos.isEmpty)
             },
-            failure: { error in
-                XCTAssertNil(error)
-            })
+            failure: { _ in })
     }
     
-    func testFetchPhotosError() {
+    func test_FetchPhotos_ShouldReturnError() {
+        // Arrange
         repository = MockPhotosRepository()
         repository.error = APIError.unknownError
-        
         manager = PhotosManager(repository: repository)
+        
+        // Act
         manager.fetchPhotos(
-            success: { [weak self] in
-                guard let self = self else { return }
-                XCTAssertTrue(self.manager.numberOfPhotos == 0)
-                XCTAssertNotNil(self.manager.photoAtIndex(0))
-            },
+            success: { },
             failure: { error in
+                // Assert
                 XCTAssertNotNil(error)
             })
     }

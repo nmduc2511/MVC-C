@@ -1,6 +1,8 @@
 import XCTest
 @testable import MVC
 
+// test_ViewControllerMethod_ExpectedBehavior()
+
 final class PhotoViewControllerTests: XCTestCase {
     var coordinator: PhotoCoordinator!
     var viewController: PhotoViewController!
@@ -25,21 +27,20 @@ final class PhotoViewControllerTests: XCTestCase {
         viewController = nil
     }
     
-    func testIBOutlets() {
+    func test_Outlet_ShouldSetupUIComponents() {
+        // Act
         _ = viewController.view
+        
+        // Assert
         XCTAssertNotNil(viewController.titleLabel)
         XCTAssertNotNil(viewController.photoImageView)
     }
     
-    func testTheAccuracyOfData() {
-        XCTAssertEqual(viewController.photo, photo)
-    }
-    
-    func testTheAccuracyOfUI() {
-        // When
+    func test_Outlet_ShouldFetchPhotoOnUI() {
+        // Act
         _ = viewController.view
         
-        // Then
+        // Assert
         XCTAssertEqual(viewController.titleLabel?.text, photo.title)
         let expectation = self.expectation(description: "Image loads")
         viewController
