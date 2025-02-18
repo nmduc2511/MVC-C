@@ -6,20 +6,8 @@ final class PhotoViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     // MARK: - Variables
-    var coordinator: PhotoCoordinator
-    var photo: PhotoEntity
-    
-    // MARK: - init
-    init(photo: PhotoEntity,
-         coordinator: PhotoCoordinator) {
-        self.photo = photo
-        self.coordinator = coordinator
-        super.init(nibName: "PhotoViewController", bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var coordinator: PhotoCoordinator!
+    var photo: PhotoEntity!
     
     // MARK: - Life cycle
     override func viewDidLoad() {

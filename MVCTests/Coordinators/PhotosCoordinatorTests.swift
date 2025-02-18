@@ -1,29 +1,26 @@
 import XCTest
 @testable import MVC
 
+// test_NavigationMethod_ShouldNavigateToExpectedScreen()
+
 final class PhotosCoordinatorTests: XCTestCase {
-    var appCoordinator: MockAppCoordinator!
     var photosCoordinator: MockPhotosCoordinator!
     
     override func setUp() {
         super.setUp()
-        appCoordinator = MockAppCoordinator()
         photosCoordinator = MockPhotosCoordinator()
     }
     
     override func tearDown() {
         super.tearDown()
-        appCoordinator = nil
         photosCoordinator = nil
     }
     
-    func testPushToPhotoDetail() {
-        // Given
-        appCoordinator.start()
+    func test_GotoPhotoDetail_PushViewControllerSuccess() {
+        // Arrange
         photosCoordinator.gotoPhotoDetail(photo: PhotoEntity())
         
-        // Then
-        XCTAssertTrue(appCoordinator.didStartPhotosCoordinator)
+        // Assert
         XCTAssertTrue(photosCoordinator.didGotoPhotoDetailCalled)
     }
 }

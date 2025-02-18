@@ -1,6 +1,8 @@
 import XCTest
 @testable import MVC
 
+// test_NavigationMethod_ShouldNavigateToExpectedScreen()
+
 final class AppCoordinatorTests: XCTestCase {
     var coordinator: MockAppCoordinator!
     
@@ -14,11 +16,11 @@ final class AppCoordinatorTests: XCTestCase {
         coordinator = nil
     }
     
-    func testStartPhotosViewController() {
-        // When
+    func test_Start_ShouldInitializeRootViewController() {
+        // Act
         coordinator.start()
         
-        // Then
+        // Assert
         XCTAssertTrue(coordinator.didStartPhotosCoordinator)
     }
 }

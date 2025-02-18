@@ -1,6 +1,8 @@
 import XCTest
 @testable import MVC
 
+// test_ViewControllerMethod_ExpectedBehavior()
+
 final class PhotoViewControllerTests: XCTestCase {
     var coordinator: PhotoCoordinator!
     var viewController: PhotoViewController!
@@ -14,9 +16,9 @@ final class PhotoViewControllerTests: XCTestCase {
             thumbnailUrl: "https://via.placeholder.com/150/92c952")
         coordinator = PhotoCoordinator(
             navigationController: UINavigationController())
-        viewController = PhotoViewController(
-            photo: photo,
-            coordinator: coordinator)
+        viewController = PhotoViewController()
+        viewController.photo = photo
+        viewController.coordinator = coordinator
     }
     
     override func tearDown() {
@@ -25,18 +27,20 @@ final class PhotoViewControllerTests: XCTestCase {
         viewController = nil
     }
     
-    func testIBOutlets() {
+    func test_Outlet_ShouldSetupUIComponents() {
+        // Act
         _ = viewController.view
+        
+        // Assert
         XCTAssertNotNil(viewController.titleLabel)
         XCTAssertNotNil(viewController.photoImageView)
     }
     
-    func testTheAccuracyOfData() {
-        XCTAssertEqual(viewController.photo, photo)
-    }
-    
-    func testTheAccuracyOfUI() {
+    func test_Outlet_ShouldFetchPhotoOnUI() {
+        // Act
         _ = viewController.view
+        
+        // Assert
         XCTAssertEqual(viewController.titleLabel?.text, photo.title)
         let expectation = self.expectation(description: "Image loads")
         viewController
