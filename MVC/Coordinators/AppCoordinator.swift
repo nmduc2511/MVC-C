@@ -14,10 +14,9 @@ final class AppCoordinator: Coordinator {
         let coordinator = PhotosCoordinator(
             navigationController: navigationController
         )
-        let controller = PhotosViewController(
-            photosMananger: manager,
-            coordinator: coordinator
-        )
+        let controller = PhotosViewController()
+        controller.photosMananger = manager
+        controller.coordinator = coordinator
         navigationController.viewControllers = [controller]
     }
 }

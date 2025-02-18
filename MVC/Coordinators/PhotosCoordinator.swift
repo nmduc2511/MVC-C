@@ -12,12 +12,10 @@ final class PhotosCoordinator: PhotosCoordinatorProtocol {
     }
     
     func gotoPhotoDetail(photo: PhotoEntity) {
-        let coordinator = PhotoCoordinator(
+        let controller = PhotoViewController()
+        controller.photo = photo
+        controller.coordinator = PhotoCoordinator(
             navigationController: navigationController
-        )
-        let controller = PhotoViewController(
-            photo: photo,
-            coordinator: coordinator
         )
         navigationController.pushViewController(controller, animated: true)
     }

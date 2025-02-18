@@ -7,20 +7,8 @@ final class PhotosViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Variables
-    var photosMananger: PhotosManager
-    var coordinator: PhotosCoordinator
-    
-    // MARK: - init
-    init(photosMananger: PhotosManager,
-         coordinator: PhotosCoordinator) {
-        self.photosMananger = photosMananger
-        self.coordinator = coordinator
-        super.init(nibName: "PhotosViewController", bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var photosMananger: PhotosManager!
+    var coordinator: PhotosCoordinatorProtocol!
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -56,6 +44,10 @@ final class PhotosViewController: UIViewController {
                 self.showErrorAlert(error: error)
             })
     }
+    
+    func gotoPhotoDetail(_ photo: PhotoEntity) {
+        coordinator.gotoPhotoDetail(photo: photo)
+    }
 }
 
 // MARK: - Tableview
@@ -85,7 +77,7 @@ extension PhotosViewController: UITableViewDataSource,
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         if let photo = photosMananger.photoAtIndex(indexPath.row) {
-            coordinator.gotoPhotoDetail(photo: photo)
+            gotoPhotoDetail(photo)
         }
     }
 }
